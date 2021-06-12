@@ -10,6 +10,7 @@ public interface EmployeeMapper extends EntityMapper<EmployeeDto, Employee> {
 
     @Mapping(target = "personId", source = "person.id")
     @Mapping(target = "personName", source = "person.name")
+    @Mapping(target = "personLastName", source = "person.lastName")
     @Mapping(target = "positionId", source = "position.id")
     @Mapping(target = "positionName", source = "position.name")
     EmployeeDto toDto(Employee entity);

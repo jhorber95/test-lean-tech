@@ -25,6 +25,9 @@ create table employees
     position_id int not null,
     salary      double,
 
-    constraint fk_person foreign key (person_id) references persons(id),
-    constraint fk_position foreign key (position_id) references positions(id),
+    constraint fk_person foreign key (person_id) references persons (id),
+    constraint fk_position foreign key (position_id) references positions (id)
 );
+
+
+

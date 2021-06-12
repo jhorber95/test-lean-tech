@@ -6,6 +6,8 @@ import com.leantech.service.dto.PersonDto;
 import com.leantech.service.mapper.PersonMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,6 +20,11 @@ public class PersonService {
     private final PersonRepository repository;
     private final PersonMapper mapper;
 
+    public Page<PersonDto> findAll(Pageable pageable) {
+        return repository.findAll(pageable)
+                .map(mapper::toDto);
+    }
+
     public PersonDto save(PersonDto dto) {
         Person entity = mapper.toEntity(dto);
         return mapper.toDto(repository.save(entity));
@@ -28,7 +35,9 @@ public class PersonService {
                 .map(mapper::toDto);
     }
 
-    public void delete(Integer id){
+    public void delete(Integer id) {
         repository.deleteById(id);
     }
+
+
 }

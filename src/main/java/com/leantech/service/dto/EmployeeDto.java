@@ -14,6 +14,7 @@ public class EmployeeDto {
     private Integer id;
     private Integer personId;
     private Integer personName;
+    private Integer personLastName;
     private Integer positionId;
     private Integer positionName;
     private Double salary;
