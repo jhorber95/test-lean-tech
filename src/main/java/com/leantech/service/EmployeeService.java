@@ -42,8 +42,10 @@ public class EmployeeService {
     }
 
     public EmployeeDto save(EmployeeDto dto) {
-        PersonDto person = personService.save(dto.getPerson());
-        dto.setPersonId(person.getId());
+        if (dto.getPerson() != null) {
+            PersonDto person = personService.save(dto.getPerson());
+            dto.setPersonId(person.getId());
+        }
         Employee entity = mapper.toEntity(dto);
         return mapper.toDto(repository.save(entity));
     }

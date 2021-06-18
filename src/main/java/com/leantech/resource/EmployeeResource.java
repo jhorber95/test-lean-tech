@@ -37,7 +37,7 @@ public class EmployeeResource {
         if (dto.getId() != null) {
             throw new BadRequestAlertException("Employee already has id");
         }
-        if (dto.getPerson() != null && dto.getPersonId() == null) {
+        if (dto.getPerson() == null && dto.getPersonId() == null) {
             throw new BadRequestAlertException("Employee with person data");
         }
         return new ResponseEntity<>(service.save(dto), HttpStatus.CREATED);
@@ -56,5 +56,4 @@ public class EmployeeResource {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 }
