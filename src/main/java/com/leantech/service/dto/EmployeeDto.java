@@ -13,9 +13,12 @@ public class EmployeeDto {
 
     private Integer id;
     private Integer personId;
-    private Integer personName;
-    private Integer personLastName;
+    private String personName;
+    private String personLastName;
     private Integer positionId;
-    private Integer positionName;
+    private String positionName;
     private Double salary;
+
+    private PersonDto person;
+
 }

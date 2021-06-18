@@ -2,6 +2,7 @@ package com.leantech.resource;
 
 import com.leantech.service.PositionService;
 import com.leantech.service.dto.PositionDto;
+import com.leantech.service.dto.PositionEmployees;
 import com.leantech.util.PaginationUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,4 +35,11 @@ public class PositionResource {
     public ResponseEntity<PositionDto> save(@RequestBody PositionDto dto) {
         return new ResponseEntity<>(service.save(dto), HttpStatus.CREATED);
     }
+
+    @GetMapping("/positions-employees")
+    public ResponseEntity<List<PositionEmployees>> getPositionWithEmployees() {
+        List<PositionEmployees> page = service.getWithEmployees();
+        return ResponseEntity.ok().body(page);
+    }
+
 }

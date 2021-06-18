@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Data
 @Builder
-@Table(name = "positions")
+@Table(name = "position")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

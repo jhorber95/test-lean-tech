@@ -1,6 +1,7 @@
 package com.leantech.service;
 
 import com.leantech.domain.Employee;
+import com.leantech.domain.Position;
 import com.leantech.repository.EmployeeRepository;
 import com.leantech.service.dto.EmployeeDto;
 import com.leantech.service.mapper.EmployeeMapper;
@@ -13,8 +14,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -42,6 +45,13 @@ public class EmployeeService {
     public Optional<EmployeeDto> findOne(Integer id) {
         return repository.findById(id)
                 .map(mapper::toDto);
+    }
+
+    public List<EmployeeDto> getByPosition(Integer positionId) {
+        return repository.findByPosition(Position.builder().id(positionId).build())
+                .stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
     }
 
     public void delete(Integer id) {

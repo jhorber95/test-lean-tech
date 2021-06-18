@@ -21,7 +21,7 @@ public class Person {
     @GeneratedValue
     private Integer id;
     private String name;
-    private String lastName;
+    private String lastname;
     private String address;
     private String cellphone;
     private String cityName;
