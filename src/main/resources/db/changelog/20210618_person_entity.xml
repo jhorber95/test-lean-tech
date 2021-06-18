@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <changeSet id="00000000000000" author="Jhorkman">
+        <createSequence sequenceName="sequence_generator" startValue="1050" incrementBy="50"/>
+    </changeSet>
+
+    <changeSet id="20210406000900-1" author="Jhorkman">
+        <createTable tableName="persons">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar"/>
+            <column name="lastname" type="varchar"/>
+            <column name="address" type="varchar"/>
+            <column name="cellphone" type="varchar"/>
+            <column name="city_Name" type="varchar"/>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20210618141700-1-data" author="Jhorkman">
+        <loadData tableName="persons"
+                  file="db/data/person.csv"
+                  separator=";">
+
+            <column name="id" type="numeric"/>
+            <column name="name" type="string"/>
+            <column name="lastname" type="string"/>
+            <column name="address" type="string"/>
+            <column name="cellphone" type="string"/>
+            <column name="city_Name" type="string"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

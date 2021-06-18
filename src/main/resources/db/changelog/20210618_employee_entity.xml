@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <changeSet id="20210406000900-2" author="Jhorkman">
+        <createTable tableName="employees">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="person_id" type="int"/>
+            <column name="position_id" type="int"/>
+            <column name="salary" type="double"/>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20210618211409-1" author="Jhorkman">
+        <addForeignKeyConstraint baseTableName="employees"
+                                 baseColumnNames="person_id"
+                                 constraintName="fk_person_id"
+                                 referencedTableName="persons"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="20210618211409-2" author="Jhorkman">
+        <addForeignKeyConstraint baseTableName="employees"
+                                 baseColumnNames="position_id"
+                                 constraintName="fk_position_id"
+                                 referencedTableName="position"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="20210618141700-3-data" author="Jhorkman">
+        <loadData tableName="employees"
+                  file="db/data/employees.csv"
+                  separator=";">
+            <column name="id" type="numeric"/>
+            <column name="person_id" type="numeric"/>
+            <column name="position_id" type="numeric"/>
+            <column name="salary" type="numeric"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

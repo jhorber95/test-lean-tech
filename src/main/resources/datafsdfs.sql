@@ -22,3 +22,7 @@ VALUES (1, 'maria', 'gonzales', '1c', '111', 'aaaa'),
        (8, 'Felipe', 'Pastrana', 'd', 'df', 'sdf'),
        (9, 'Darwin', 'GAlindez', 'dsf', 'sdf', 'sf'),
        (10, 'Mario', 'CAstañeda', 'ftrt', 'ty', 'rer');
+
+insert into positions(id, name)
+values (11, 'Architect'),
+       (22, 'Baker');
