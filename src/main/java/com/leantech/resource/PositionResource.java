@@ -1,8 +1,10 @@
 package com.leantech.resource;
 
+import com.leantech.resource.error.BadRequestAlertException;
 import com.leantech.service.PositionService;
 import com.leantech.service.dto.PositionDto;
 import com.leantech.service.dto.PositionEmployees;
+import com.leantech.util.HeaderUtil;
 import com.leantech.util.PaginationUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,13 +35,31 @@ public class PositionResource {
 
     @PostMapping("/positions")
     public ResponseEntity<PositionDto> save(@RequestBody PositionDto dto) {
+        if (dto.getId() != null) {
+            throw new BadRequestAlertException("Position already has id");
+        }
         return new ResponseEntity<>(service.save(dto), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/positions")
+    public ResponseEntity<PositionDto> update(@RequestBody PositionDto dto) {
+        if (dto.getId() == null) {
+            throw new BadRequestAlertException("Invalid id");
+        }
+        return new ResponseEntity<>(service.save(dto), HttpStatus.OK);
     }
 
     @GetMapping("/positions-employees")
     public ResponseEntity<List<PositionEmployees>> getPositionWithEmployees() {
         List<PositionEmployees> page = service.getWithEmployees();
         return ResponseEntity.ok().body(page);
+    }
+
+    @DeleteMapping("/positions/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        service.delete(id);
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert("Lean", true, "Position", id.toString())).build();
+
     }
 
 }

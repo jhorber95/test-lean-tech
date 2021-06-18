@@ -56,4 +56,7 @@ public class PositionService {
                 .map(mapper::toDto);
     }
 
+    public void delete(Integer id) {
+        repository.deleteById(id);
+    }
 }

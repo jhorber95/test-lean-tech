@@ -1,9 +1,11 @@
 package com.leantech.service;
 
 import com.leantech.domain.Employee;
+import com.leantech.domain.Person;
 import com.leantech.domain.Position;
 import com.leantech.repository.EmployeeRepository;
 import com.leantech.service.dto.EmployeeDto;
+import com.leantech.service.dto.PersonDto;
 import com.leantech.service.mapper.EmployeeMapper;
 import io.github.perplexhub.rsql.RSQLJPASupport;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,8 @@ public class EmployeeService {
     private final EmployeeRepository repository;
     private final EmployeeMapper mapper;
 
+    private final PersonService personService;
+
     public Page<EmployeeDto> findByCriteria(Pageable pageable, String filter) {
         Specification<Employee> specification = Specification.where(null);
         if (filter != null && !filter.isEmpty()) {
@@ -38,6 +42,8 @@ public class EmployeeService {
     }
 
     public EmployeeDto save(EmployeeDto dto) {
+        PersonDto person = personService.save(dto.getPerson());
+        dto.setPersonId(person.getId());
         Employee entity = mapper.toEntity(dto);
         return mapper.toDto(repository.save(entity));
     }
