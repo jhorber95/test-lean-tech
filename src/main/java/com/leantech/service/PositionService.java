@@ -1,8 +1,6 @@
 package com.leantech.service;
 
-import com.leantech.domain.Employee;
 import com.leantech.domain.Position;
-import com.leantech.repository.EmployeeRepository;
 import com.leantech.repository.PositionRepository;
 import com.leantech.service.dto.EmployeeDto;
 import com.leantech.service.dto.PositionDto;
@@ -14,8 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
